@@ -12,12 +12,39 @@ namespace MLImageProcessing
         private MathMLProcessor mathMLProcessor;
         private Bitmap? originalImage;
         private Bitmap? processedImage;
+        private ThemeManager themeManager;
 
         public MainForm()
         {
             InitializeComponent();
             imageProcessor = new ImageProcessor();
             mathMLProcessor = new MathMLProcessor();
+            themeManager = new ThemeManager();
+            ApplyTheme();
+        }
+
+        private void ApplyTheme()
+        {
+            themeManager.ApplyTheme(this);
+            UpdateThemeButtonText();
+        }
+
+        private void UpdateThemeButtonText()
+        {
+            if (themeManager.CurrentTheme == Theme.Light)
+            {
+                btnThemeToggle.Text = "🌙 Koyu Tema";
+            }
+            else
+            {
+                btnThemeToggle.Text = "☀️ Açık Tema";
+            }
+        }
+
+        private void btnThemeToggle_Click(object sender, EventArgs e)
+        {
+            themeManager.ToggleTheme();
+            ApplyTheme();
         }
 
         private void btnLoadImage_Click(object sender, EventArgs e)

@@ -29,6 +29,7 @@ namespace MLImageProcessing
         private System.Windows.Forms.GroupBox groupBoxFilters;
         private System.Windows.Forms.GroupBox groupBoxAdjustments;
         private System.Windows.Forms.GroupBox groupBoxML;
+        private System.Windows.Forms.Button btnThemeToggle;
 
         protected override void Dispose(bool disposing)
         {
@@ -67,6 +68,7 @@ namespace MLImageProcessing
             this.groupBoxFilters = new System.Windows.Forms.GroupBox();
             this.groupBoxAdjustments = new System.Windows.Forms.GroupBox();
             this.groupBoxML = new System.Windows.Forms.GroupBox();
+            this.btnThemeToggle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProcessed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlurRadius)).BeginInit();
@@ -77,9 +79,9 @@ namespace MLImageProcessing
             // pictureBoxOriginal
             // 
             this.pictureBoxOriginal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxOriginal.Location = new System.Drawing.Point(12, 40);
+            this.pictureBoxOriginal.Location = new System.Drawing.Point(15, 55);
             this.pictureBoxOriginal.Name = "pictureBoxOriginal";
-            this.pictureBoxOriginal.Size = new System.Drawing.Size(400, 300);
+            this.pictureBoxOriginal.Size = new System.Drawing.Size(400, 320);
             this.pictureBoxOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxOriginal.TabIndex = 0;
             this.pictureBoxOriginal.TabStop = false;
@@ -87,28 +89,28 @@ namespace MLImageProcessing
             // pictureBoxProcessed
             // 
             this.pictureBoxProcessed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxProcessed.Location = new System.Drawing.Point(430, 40);
+            this.pictureBoxProcessed.Location = new System.Drawing.Point(430, 55);
             this.pictureBoxProcessed.Name = "pictureBoxProcessed";
-            this.pictureBoxProcessed.Size = new System.Drawing.Size(400, 300);
+            this.pictureBoxProcessed.Size = new System.Drawing.Size(400, 320);
             this.pictureBoxProcessed.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxProcessed.TabIndex = 1;
             this.pictureBoxProcessed.TabStop = false;
             // 
             // btnLoadImage
             // 
-            this.btnLoadImage.Location = new System.Drawing.Point(12, 12);
+            this.btnLoadImage.Location = new System.Drawing.Point(15, 15);
             this.btnLoadImage.Name = "btnLoadImage";
-            this.btnLoadImage.Size = new System.Drawing.Size(120, 30);
+            this.btnLoadImage.Size = new System.Drawing.Size(130, 35);
             this.btnLoadImage.TabIndex = 2;
-            this.btnLoadImage.Text = "Görüntü Yükle";
+            this.btnLoadImage.Text = "📷 Görüntü Yükle";
             this.btnLoadImage.UseVisualStyleBackColor = true;
             this.btnLoadImage.Click += new System.EventHandler(this.btnLoadImage_Click);
             // 
             // btnGrayscale
             // 
-            this.btnGrayscale.Location = new System.Drawing.Point(6, 22);
+            this.btnGrayscale.Location = new System.Drawing.Point(10, 25);
             this.btnGrayscale.Name = "btnGrayscale";
-            this.btnGrayscale.Size = new System.Drawing.Size(100, 30);
+            this.btnGrayscale.Size = new System.Drawing.Size(110, 35);
             this.btnGrayscale.TabIndex = 3;
             this.btnGrayscale.Text = "Gri Tonlama";
             this.btnGrayscale.UseVisualStyleBackColor = true;
@@ -116,9 +118,9 @@ namespace MLImageProcessing
             // 
             // btnEdgeDetection
             // 
-            this.btnEdgeDetection.Location = new System.Drawing.Point(112, 22);
+            this.btnEdgeDetection.Location = new System.Drawing.Point(130, 25);
             this.btnEdgeDetection.Name = "btnEdgeDetection";
-            this.btnEdgeDetection.Size = new System.Drawing.Size(100, 30);
+            this.btnEdgeDetection.Size = new System.Drawing.Size(110, 35);
             this.btnEdgeDetection.TabIndex = 4;
             this.btnEdgeDetection.Text = "Kenar Tespiti";
             this.btnEdgeDetection.UseVisualStyleBackColor = true;
@@ -126,9 +128,9 @@ namespace MLImageProcessing
             // 
             // btnBlur
             // 
-            this.btnBlur.Location = new System.Drawing.Point(218, 22);
+            this.btnBlur.Location = new System.Drawing.Point(250, 25);
             this.btnBlur.Name = "btnBlur";
-            this.btnBlur.Size = new System.Drawing.Size(100, 30);
+            this.btnBlur.Size = new System.Drawing.Size(110, 35);
             this.btnBlur.TabIndex = 5;
             this.btnBlur.Text = "Blur";
             this.btnBlur.UseVisualStyleBackColor = true;
@@ -136,9 +138,9 @@ namespace MLImageProcessing
             // 
             // btnSharpen
             // 
-            this.btnSharpen.Location = new System.Drawing.Point(324, 22);
+            this.btnSharpen.Location = new System.Drawing.Point(370, 25);
             this.btnSharpen.Name = "btnSharpen";
-            this.btnSharpen.Size = new System.Drawing.Size(100, 30);
+            this.btnSharpen.Size = new System.Drawing.Size(110, 35);
             this.btnSharpen.TabIndex = 6;
             this.btnSharpen.Text = "Keskinleştir";
             this.btnSharpen.UseVisualStyleBackColor = true;
@@ -146,9 +148,9 @@ namespace MLImageProcessing
             // 
             // btnBrightness
             // 
-            this.btnBrightness.Location = new System.Drawing.Point(6, 22);
+            this.btnBrightness.Location = new System.Drawing.Point(10, 25);
             this.btnBrightness.Name = "btnBrightness";
-            this.btnBrightness.Size = new System.Drawing.Size(100, 30);
+            this.btnBrightness.Size = new System.Drawing.Size(110, 35);
             this.btnBrightness.TabIndex = 7;
             this.btnBrightness.Text = "Parlaklık";
             this.btnBrightness.UseVisualStyleBackColor = true;
@@ -156,9 +158,9 @@ namespace MLImageProcessing
             // 
             // btnContrast
             // 
-            this.btnContrast.Location = new System.Drawing.Point(112, 22);
+            this.btnContrast.Location = new System.Drawing.Point(130, 25);
             this.btnContrast.Name = "btnContrast";
-            this.btnContrast.Size = new System.Drawing.Size(100, 30);
+            this.btnContrast.Size = new System.Drawing.Size(110, 35);
             this.btnContrast.TabIndex = 8;
             this.btnContrast.Text = "Kontrast";
             this.btnContrast.UseVisualStyleBackColor = true;
@@ -168,83 +170,102 @@ namespace MLImageProcessing
             // 
             this.btnMLProcess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btnMLProcess.ForeColor = System.Drawing.Color.White;
-            this.btnMLProcess.Location = new System.Drawing.Point(6, 22);
+            this.btnMLProcess.Location = new System.Drawing.Point(10, 25);
             this.btnMLProcess.Name = "btnMLProcess";
-            this.btnMLProcess.Size = new System.Drawing.Size(150, 40);
+            this.btnMLProcess.Size = new System.Drawing.Size(160, 45);
             this.btnMLProcess.TabIndex = 9;
-            this.btnMLProcess.Text = "ML İşlemi Uygula";
+            this.btnMLProcess.Text = "🤖 ML İşlemi Uygula";
             this.btnMLProcess.UseVisualStyleBackColor = false;
             this.btnMLProcess.Click += new System.EventHandler(this.btnMLProcess_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(138, 12);
+            this.btnSave.Location = new System.Drawing.Point(155, 15);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(120, 30);
+            this.btnSave.Size = new System.Drawing.Size(130, 35);
             this.btnSave.TabIndex = 10;
-            this.btnSave.Text = "Kaydet";
+            this.btnSave.Text = "💾 Kaydet";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(264, 12);
+            this.btnReset.Location = new System.Drawing.Point(295, 15);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(120, 30);
+            this.btnReset.Size = new System.Drawing.Size(130, 35);
             this.btnReset.TabIndex = 11;
-            this.btnReset.Text = "Sıfırla";
+            this.btnReset.Text = "🔄 Sıfırla";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnThemeToggle
+            // 
+            this.btnThemeToggle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btnThemeToggle.ForeColor = System.Drawing.Color.White;
+            this.btnThemeToggle.Location = new System.Drawing.Point(700, 15);
+            this.btnThemeToggle.Name = "btnThemeToggle";
+            this.btnThemeToggle.Size = new System.Drawing.Size(130, 35);
+            this.btnThemeToggle.TabIndex = 26;
+            this.btnThemeToggle.Text = "🌙 Koyu Tema";
+            this.btnThemeToggle.UseVisualStyleBackColor = false;
+            this.btnThemeToggle.Click += new System.EventHandler(this.btnThemeToggle_Click);
             // 
             // lblOriginal
             // 
             this.lblOriginal.AutoSize = true;
-            this.lblOriginal.Location = new System.Drawing.Point(12, 343);
+            this.lblOriginal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblOriginal.Location = new System.Drawing.Point(15, 380);
             this.lblOriginal.Name = "lblOriginal";
-            this.lblOriginal.Size = new System.Drawing.Size(60, 15);
+            this.lblOriginal.Size = new System.Drawing.Size(58, 15);
             this.lblOriginal.TabIndex = 12;
             this.lblOriginal.Text = "Orijinal:";
             // 
             // lblProcessed
             // 
             this.lblProcessed.AutoSize = true;
-            this.lblProcessed.Location = new System.Drawing.Point(430, 343);
+            this.lblProcessed.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblProcessed.Location = new System.Drawing.Point(430, 380);
             this.lblProcessed.Name = "lblProcessed";
-            this.lblProcessed.Size = new System.Drawing.Size(67, 15);
+            this.lblProcessed.Size = new System.Drawing.Size(65, 15);
             this.lblProcessed.TabIndex = 13;
             this.lblProcessed.Text = "İşlenmiş:";
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(12, 500);
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblStatus.Location = new System.Drawing.Point(15, 640);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(42, 15);
+            this.lblStatus.Size = new System.Drawing.Size(50, 15);
             this.lblStatus.TabIndex = 14;
             this.lblStatus.Text = "Durum:";
             // 
             // txtMLResults
             // 
-            this.txtMLResults.Location = new System.Drawing.Point(6, 68);
+            this.txtMLResults.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtMLResults.Location = new System.Drawing.Point(10, 80);
             this.txtMLResults.Multiline = true;
             this.txtMLResults.Name = "txtMLResults";
             this.txtMLResults.ReadOnly = true;
             this.txtMLResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMLResults.Size = new System.Drawing.Size(300, 100);
+            this.txtMLResults.Size = new System.Drawing.Size(320, 110);
             this.txtMLResults.TabIndex = 15;
             // 
             // lblMLResults
             // 
             this.lblMLResults.AutoSize = true;
-            this.lblMLResults.Location = new System.Drawing.Point(6, 50);
+            this.lblMLResults.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMLResults.Location = new System.Drawing.Point(10, 60);
             this.lblMLResults.Name = "lblMLResults";
             this.lblMLResults.Size = new System.Drawing.Size(78, 15);
             this.lblMLResults.TabIndex = 16;
             this.lblMLResults.Text = "ML Sonuçları:";
+            this.lblMLResults.Visible = false;
             // 
             // nudBlurRadius
             // 
-            this.nudBlurRadius.Location = new System.Drawing.Point(218, 58);
+            this.nudBlurRadius.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nudBlurRadius.Location = new System.Drawing.Point(250, 68);
             this.nudBlurRadius.Maximum = new decimal(new int[] {
             20,
             0,
@@ -256,8 +277,8 @@ namespace MLImageProcessing
             0,
             0});
             this.nudBlurRadius.Name = "nudBlurRadius";
-            this.nudBlurRadius.Size = new System.Drawing.Size(100, 23);
-            this.nudBlurRadius.TabIndex = 17;
+            this.nudBlurRadius.Size = new System.Drawing.Size(110, 23);
+            this.nudBlurRadius.TabIndex = 20;
             this.nudBlurRadius.Value = new decimal(new int[] {
             5,
             0,
@@ -267,12 +288,13 @@ namespace MLImageProcessing
             // nudBrightness
             // 
             this.nudBrightness.DecimalPlaces = 0;
-            this.nudBrightness.Location = new System.Drawing.Point(218, 58);
+            this.nudBrightness.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nudBrightness.Location = new System.Drawing.Point(10, 68);
             this.nudBrightness.Maximum = new decimal(100);
             this.nudBrightness.Minimum = new decimal(-100);
             this.nudBrightness.Name = "nudBrightness";
-            this.nudBrightness.Size = new System.Drawing.Size(100, 23);
-            this.nudBrightness.TabIndex = 18;
+            this.nudBrightness.Size = new System.Drawing.Size(110, 23);
+            this.nudBrightness.TabIndex = 19;
             this.nudBrightness.Value = new decimal(new int[] {
             0,
             0,
@@ -282,12 +304,13 @@ namespace MLImageProcessing
             // nudContrast
             // 
             this.nudContrast.DecimalPlaces = 2;
+            this.nudContrast.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.nudContrast.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.nudContrast.Location = new System.Drawing.Point(218, 58);
+            this.nudContrast.Location = new System.Drawing.Point(130, 68);
             this.nudContrast.Maximum = new decimal(new int[] {
             3,
             0,
@@ -299,8 +322,8 @@ namespace MLImageProcessing
             0,
             131072});
             this.nudContrast.Name = "nudContrast";
-            this.nudContrast.Size = new System.Drawing.Size(100, 23);
-            this.nudContrast.TabIndex = 19;
+            this.nudContrast.Size = new System.Drawing.Size(110, 23);
+            this.nudContrast.TabIndex = 21;
             this.nudContrast.Value = new decimal(new int[] {
             1,
             0,
@@ -310,29 +333,38 @@ namespace MLImageProcessing
             // lblBlurRadius
             // 
             this.lblBlurRadius.AutoSize = true;
-            this.lblBlurRadius.Location = new System.Drawing.Point(218, 40);
+            this.lblBlurRadius.BackColor = System.Drawing.Color.Transparent;
+            this.lblBlurRadius.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblBlurRadius.Location = new System.Drawing.Point(250, 50);
             this.lblBlurRadius.Name = "lblBlurRadius";
-            this.lblBlurRadius.Size = new System.Drawing.Size(68, 15);
-            this.lblBlurRadius.TabIndex = 20;
+            this.lblBlurRadius.Size = new System.Drawing.Size(75, 15);
+            this.lblBlurRadius.TabIndex = 16;
             this.lblBlurRadius.Text = "Blur Radius:";
+            this.lblBlurRadius.Visible = false;
             // 
             // lblBrightness
             // 
             this.lblBrightness.AutoSize = true;
-            this.lblBrightness.Location = new System.Drawing.Point(218, 40);
+            this.lblBrightness.BackColor = System.Drawing.Color.Transparent;
+            this.lblBrightness.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblBrightness.Location = new System.Drawing.Point(10, 50);
             this.lblBrightness.Name = "lblBrightness";
             this.lblBrightness.Size = new System.Drawing.Size(60, 15);
-            this.lblBrightness.TabIndex = 21;
+            this.lblBrightness.TabIndex = 17;
             this.lblBrightness.Text = "Parlaklık:";
+            this.lblBrightness.Visible = false;
             // 
             // lblContrast
             // 
             this.lblContrast.AutoSize = true;
-            this.lblContrast.Location = new System.Drawing.Point(218, 40);
+            this.lblContrast.BackColor = System.Drawing.Color.Transparent;
+            this.lblContrast.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblContrast.Location = new System.Drawing.Point(130, 50);
             this.lblContrast.Name = "lblContrast";
             this.lblContrast.Size = new System.Drawing.Size(56, 15);
-            this.lblContrast.TabIndex = 22;
+            this.lblContrast.TabIndex = 18;
             this.lblContrast.Text = "Kontrast:";
+            this.lblContrast.Visible = false;
             // 
             // groupBoxFilters
             // 
@@ -341,13 +373,13 @@ namespace MLImageProcessing
             this.groupBoxFilters.Controls.Add(this.btnBlur);
             this.groupBoxFilters.Controls.Add(this.btnSharpen);
             this.groupBoxFilters.Controls.Add(this.nudBlurRadius);
-            this.groupBoxFilters.Controls.Add(this.lblBlurRadius);
-            this.groupBoxFilters.Location = new System.Drawing.Point(12, 360);
+            this.groupBoxFilters.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxFilters.Location = new System.Drawing.Point(15, 400);
             this.groupBoxFilters.Name = "groupBoxFilters";
-            this.groupBoxFilters.Size = new System.Drawing.Size(430, 90);
+            this.groupBoxFilters.Size = new System.Drawing.Size(490, 110);
             this.groupBoxFilters.TabIndex = 23;
             this.groupBoxFilters.TabStop = false;
-            this.groupBoxFilters.Text = "Filtreler";
+            this.groupBoxFilters.Text = "🎨 Filtreler";
             // 
             // groupBoxAdjustments
             // 
@@ -355,32 +387,32 @@ namespace MLImageProcessing
             this.groupBoxAdjustments.Controls.Add(this.btnContrast);
             this.groupBoxAdjustments.Controls.Add(this.nudBrightness);
             this.groupBoxAdjustments.Controls.Add(this.nudContrast);
-            this.groupBoxAdjustments.Controls.Add(this.lblBrightness);
-            this.groupBoxAdjustments.Controls.Add(this.lblContrast);
-            this.groupBoxAdjustments.Location = new System.Drawing.Point(448, 360);
+            this.groupBoxAdjustments.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxAdjustments.Location = new System.Drawing.Point(515, 400);
             this.groupBoxAdjustments.Name = "groupBoxAdjustments";
-            this.groupBoxAdjustments.Size = new System.Drawing.Size(382, 90);
+            this.groupBoxAdjustments.Size = new System.Drawing.Size(375, 110);
             this.groupBoxAdjustments.TabIndex = 24;
             this.groupBoxAdjustments.TabStop = false;
-            this.groupBoxAdjustments.Text = "Ayarlamalar";
+            this.groupBoxAdjustments.Text = "⚙️ Ayarlamalar";
             // 
             // groupBoxML
             // 
             this.groupBoxML.Controls.Add(this.btnMLProcess);
-            this.groupBoxML.Controls.Add(this.lblMLResults);
             this.groupBoxML.Controls.Add(this.txtMLResults);
-            this.groupBoxML.Location = new System.Drawing.Point(12, 456);
+            this.groupBoxML.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxML.Location = new System.Drawing.Point(15, 520);
             this.groupBoxML.Name = "groupBoxML";
-            this.groupBoxML.Size = new System.Drawing.Size(818, 180);
+            this.groupBoxML.Size = new System.Drawing.Size(875, 210);
             this.groupBoxML.TabIndex = 25;
             this.groupBoxML.TabStop = false;
-            this.groupBoxML.Text = "Machine Learning İşlemleri";
+            this.groupBoxML.Text = "🤖 Machine Learning İşlemleri";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 648);
+            this.ClientSize = new System.Drawing.Size(905, 750);
+            this.Controls.Add(this.btnThemeToggle);
             this.Controls.Add(this.groupBoxML);
             this.Controls.Add(this.groupBoxAdjustments);
             this.Controls.Add(this.groupBoxFilters);
@@ -392,6 +424,7 @@ namespace MLImageProcessing
             this.Controls.Add(this.btnLoadImage);
             this.Controls.Add(this.pictureBoxProcessed);
             this.Controls.Add(this.pictureBoxOriginal);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";

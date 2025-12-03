@@ -60,44 +60,62 @@ namespace MLImageProcessing.Processors
 
         public Bitmap ApplyBlur(Bitmap original, int radius)
         {
-            Bitmap blurred = new Bitmap(original.Width, original.Height);
-            int size = radius * 2 + 1;
-            int totalPixels = size * size;
+            if (radius < 1) radius = 1;
+            if (radius > 20) radius = 20;
             
-            for (int x = 0; x < original.Width; x++)
+            Bitmap blurred = new Bitmap(original.Width, original.Height);
+            
+            // LockBits kullanarak daha hızlı piksel erişimi
+            Rectangle rect = new Rectangle(0, 0, original.Width, original.Height);
+            BitmapData originalData = original.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+            BitmapData blurredData = blurred.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            
+            unsafe
             {
+                byte* originalPtr = (byte*)originalData.Scan0;
+                byte* blurredPtr = (byte*)blurredData.Scan0;
+                int stride = originalData.Stride;
+                
                 for (int y = 0; y < original.Height; y++)
                 {
-                    int r = 0, g = 0, b = 0;
-                    int count = 0;
-                    
-                    for (int i = -radius; i <= radius; i++)
+                    for (int x = 0; x < original.Width; x++)
                     {
-                        for (int j = -radius; j <= radius; j++)
+                        long r = 0, g = 0, b = 0;
+                        int count = 0;
+                        
+                        // Box blur - komşu piksellerin ortalamasını al
+                        for (int i = -radius; i <= radius; i++)
                         {
-                            int nx = x + i;
-                            int ny = y + j;
-                            
-                            if (nx >= 0 && nx < original.Width && ny >= 0 && ny < original.Height)
+                            for (int j = -radius; j <= radius; j++)
                             {
-                                Color pixel = original.GetPixel(nx, ny);
-                                r += pixel.R;
-                                g += pixel.G;
-                                b += pixel.B;
-                                count++;
+                                int nx = x + i;
+                                int ny = y + j;
+                                
+                                if (nx >= 0 && nx < original.Width && ny >= 0 && ny < original.Height)
+                                {
+                                    byte* pixelPtr = originalPtr + (ny * stride) + (nx * 4);
+                                    b += pixelPtr[0]; // B
+                                    g += pixelPtr[1]; // G
+                                    r += pixelPtr[2]; // R
+                                    count++;
+                                }
                             }
                         }
-                    }
-                    
-                    if (count > 0)
-                    {
-                        r /= count;
-                        g /= count;
-                        b /= count;
-                        blurred.SetPixel(x, y, Color.FromArgb(r, g, b));
+                        
+                        if (count > 0)
+                        {
+                            byte* outputPtr = blurredPtr + (y * stride) + (x * 4);
+                            outputPtr[0] = (byte)(b / count); // B
+                            outputPtr[1] = (byte)(g / count); // G
+                            outputPtr[2] = (byte)(r / count); // R
+                            outputPtr[3] = 255; // A
+                        }
                     }
                 }
             }
+            
+            original.UnlockBits(originalData);
+            blurred.UnlockBits(blurredData);
             
             return blurred;
         }
@@ -190,4 +208,5 @@ namespace MLImageProcessing.Processors
         }
     }
 }
+
 
