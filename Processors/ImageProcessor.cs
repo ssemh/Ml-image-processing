@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace MLImageProcessing.Processors
 {
@@ -205,6 +206,144 @@ namespace MLImageProcessing.Processors
             }
             
             return adjusted;
+        }
+
+        // Geometrik Dönüşümler
+
+        /// <summary>
+        /// Görüntüyü belirtilen açıyla döndürür
+        /// </summary>
+        public Bitmap Rotate(Bitmap original, float angle)
+        {
+            // Açıyı radyana çevir
+            double radians = angle * Math.PI / 180.0;
+            double cos = Math.Cos(radians);
+            double sin = Math.Sin(radians);
+
+            // Döndürülmüş görüntünün boyutlarını hesapla
+            int newWidth = (int)(Math.Abs(original.Width * cos) + Math.Abs(original.Height * sin));
+            int newHeight = (int)(Math.Abs(original.Width * sin) + Math.Abs(original.Height * cos));
+
+            Bitmap rotated = new Bitmap(newWidth, newHeight);
+            Graphics g = Graphics.FromImage(rotated);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+            // Döndürme merkezini hesapla
+            float centerX = newWidth / 2f;
+            float centerY = newHeight / 2f;
+
+            // Dönüşüm matrisini ayarla
+            g.TranslateTransform(centerX, centerY);
+            g.RotateTransform(angle);
+            g.TranslateTransform(-original.Width / 2f, -original.Height / 2f);
+
+            // Görüntüyü çiz
+            g.DrawImage(original, 0, 0);
+            g.Dispose();
+
+            return rotated;
+        }
+
+        /// <summary>
+        /// Görüntüyü yeniden boyutlandırır (zoom)
+        /// </summary>
+        public Bitmap Resize(Bitmap original, float scaleFactor)
+        {
+            if (scaleFactor <= 0) scaleFactor = 1.0f;
+
+            int newWidth = (int)(original.Width * scaleFactor);
+            int newHeight = (int)(original.Height * scaleFactor);
+
+            // Minimum ve maksimum boyut kontrolü
+            if (newWidth < 1) newWidth = 1;
+            if (newHeight < 1) newHeight = 1;
+            if (newWidth > 5000) newWidth = 5000;
+            if (newHeight > 5000) newHeight = 5000;
+
+            Bitmap resized = new Bitmap(newWidth, newHeight);
+            Graphics g = Graphics.FromImage(resized);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.DrawImage(original, 0, 0, newWidth, newHeight);
+            g.Dispose();
+
+            return resized;
+        }
+
+        /// <summary>
+        /// Görüntüyü yatay veya dikey olarak yansıtır
+        /// </summary>
+        public Bitmap Flip(Bitmap original, bool horizontal, bool vertical)
+        {
+            Bitmap flipped = new Bitmap(original.Width, original.Height);
+            Graphics g = Graphics.FromImage(flipped);
+
+            if (horizontal && vertical)
+            {
+                // Her iki yönde yansıt
+                g.TranslateTransform(original.Width, original.Height);
+                g.ScaleTransform(-1, -1);
+            }
+            else if (horizontal)
+            {
+                // Yatay yansıt
+                g.TranslateTransform(original.Width, 0);
+                g.ScaleTransform(-1, 1);
+            }
+            else if (vertical)
+            {
+                // Dikey yansıt
+                g.TranslateTransform(0, original.Height);
+                g.ScaleTransform(1, -1);
+            }
+
+            g.DrawImage(original, 0, 0);
+            g.Dispose();
+
+            return flipped;
+        }
+
+        /// <summary>
+        /// Görüntüden belirtilen dikdörtgen alanı kırpar
+        /// </summary>
+        public Bitmap Crop(Bitmap original, Rectangle cropArea)
+        {
+            // Kırpma alanını görüntü sınırları içinde tut
+            cropArea.X = Math.Max(0, Math.Min(cropArea.X, original.Width - 1));
+            cropArea.Y = Math.Max(0, Math.Min(cropArea.Y, original.Height - 1));
+            cropArea.Width = Math.Min(cropArea.Width, original.Width - cropArea.X);
+            cropArea.Height = Math.Min(cropArea.Height, original.Height - cropArea.Y);
+
+            if (cropArea.Width <= 0 || cropArea.Height <= 0)
+                return original;
+
+            Bitmap cropped = new Bitmap(cropArea.Width, cropArea.Height);
+            Graphics g = Graphics.FromImage(cropped);
+            g.DrawImage(original, 0, 0, cropArea, GraphicsUnit.Pixel);
+            g.Dispose();
+
+            return cropped;
+        }
+
+        /// <summary>
+        /// Görüntüyü belirtilen genişlik ve yüksekliğe yeniden boyutlandırır
+        /// </summary>
+        public Bitmap ResizeToDimensions(Bitmap original, int width, int height)
+        {
+            if (width < 1) width = 1;
+            if (height < 1) height = 1;
+            if (width > 5000) width = 5000;
+            if (height > 5000) height = 5000;
+
+            Bitmap resized = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(resized);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.DrawImage(original, 0, 0, width, height);
+            g.Dispose();
+
+            return resized;
         }
     }
 }

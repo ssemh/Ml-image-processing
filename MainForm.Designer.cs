@@ -30,6 +30,13 @@ namespace MLImageProcessing
         private System.Windows.Forms.GroupBox groupBoxAdjustments;
         private System.Windows.Forms.GroupBox groupBoxML;
         private System.Windows.Forms.Button btnThemeToggle;
+        private System.Windows.Forms.GroupBox groupBoxGeometric;
+        private System.Windows.Forms.Button btnRotate;
+        private System.Windows.Forms.Button btnFlipHorizontal;
+        private System.Windows.Forms.Button btnFlipVertical;
+        private System.Windows.Forms.Button btnCrop;
+        private System.Windows.Forms.NumericUpDown nudRotationAngle;
+        private System.Windows.Forms.Label lblRotationAngle;
 
         protected override void Dispose(bool disposing)
         {
@@ -69,11 +76,19 @@ namespace MLImageProcessing
             this.groupBoxAdjustments = new System.Windows.Forms.GroupBox();
             this.groupBoxML = new System.Windows.Forms.GroupBox();
             this.btnThemeToggle = new System.Windows.Forms.Button();
+            this.groupBoxGeometric = new System.Windows.Forms.GroupBox();
+            this.btnRotate = new System.Windows.Forms.Button();
+            this.btnFlipHorizontal = new System.Windows.Forms.Button();
+            this.btnFlipVertical = new System.Windows.Forms.Button();
+            this.btnCrop = new System.Windows.Forms.Button();
+            this.nudRotationAngle = new System.Windows.Forms.NumericUpDown();
+            this.lblRotationAngle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProcessed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlurRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudContrast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRotationAngle)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxOriginal
@@ -234,7 +249,7 @@ namespace MLImageProcessing
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblStatus.Location = new System.Drawing.Point(15, 640);
+            this.lblStatus.Location = new System.Drawing.Point(15, 850);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(50, 15);
             this.lblStatus.TabIndex = 14;
@@ -400,19 +415,112 @@ namespace MLImageProcessing
             this.groupBoxML.Controls.Add(this.btnMLProcess);
             this.groupBoxML.Controls.Add(this.txtMLResults);
             this.groupBoxML.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBoxML.Location = new System.Drawing.Point(15, 520);
+            this.groupBoxML.Location = new System.Drawing.Point(15, 630);
             this.groupBoxML.Name = "groupBoxML";
             this.groupBoxML.Size = new System.Drawing.Size(875, 210);
             this.groupBoxML.TabIndex = 25;
             this.groupBoxML.TabStop = false;
             this.groupBoxML.Text = "🤖 Machine Learning İşlemleri";
             // 
+            // groupBoxGeometric
+            // 
+            this.groupBoxGeometric.Controls.Add(this.btnRotate);
+            this.groupBoxGeometric.Controls.Add(this.btnFlipHorizontal);
+            this.groupBoxGeometric.Controls.Add(this.btnFlipVertical);
+            this.groupBoxGeometric.Controls.Add(this.btnCrop);
+            this.groupBoxGeometric.Controls.Add(this.nudRotationAngle);
+            this.groupBoxGeometric.Controls.Add(this.lblRotationAngle);
+            this.groupBoxGeometric.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxGeometric.Location = new System.Drawing.Point(15, 520);
+            this.groupBoxGeometric.Name = "groupBoxGeometric";
+            this.groupBoxGeometric.Size = new System.Drawing.Size(875, 100);
+            this.groupBoxGeometric.TabIndex = 27;
+            this.groupBoxGeometric.TabStop = false;
+            this.groupBoxGeometric.Text = "📐 Geometrik Dönüşümler";
+            // 
+            // btnRotate
+            // 
+            this.btnRotate.Location = new System.Drawing.Point(10, 25);
+            this.btnRotate.Name = "btnRotate";
+            this.btnRotate.Size = new System.Drawing.Size(110, 35);
+            this.btnRotate.TabIndex = 0;
+            this.btnRotate.Text = "🔄 Döndür";
+            this.btnRotate.UseVisualStyleBackColor = true;
+            this.btnRotate.Click += new System.EventHandler(this.btnRotate_Click);
+            // 
+            // 
+            // btnFlipHorizontal
+            // 
+            this.btnFlipHorizontal.Location = new System.Drawing.Point(130, 25);
+            this.btnFlipHorizontal.Name = "btnFlipHorizontal";
+            this.btnFlipHorizontal.Size = new System.Drawing.Size(110, 35);
+            this.btnFlipHorizontal.TabIndex = 2;
+            this.btnFlipHorizontal.Text = "↔️ Yatay Yansıt";
+            this.btnFlipHorizontal.UseVisualStyleBackColor = true;
+            this.btnFlipHorizontal.Click += new System.EventHandler(this.btnFlipHorizontal_Click);
+            // 
+            // btnFlipVertical
+            // 
+            this.btnFlipVertical.Location = new System.Drawing.Point(250, 25);
+            this.btnFlipVertical.Name = "btnFlipVertical";
+            this.btnFlipVertical.Size = new System.Drawing.Size(110, 35);
+            this.btnFlipVertical.TabIndex = 3;
+            this.btnFlipVertical.Text = "↕️ Dikey Yansıt";
+            this.btnFlipVertical.UseVisualStyleBackColor = true;
+            this.btnFlipVertical.Click += new System.EventHandler(this.btnFlipVertical_Click);
+            // 
+            // btnCrop
+            // 
+            this.btnCrop.Location = new System.Drawing.Point(370, 25);
+            this.btnCrop.Name = "btnCrop";
+            this.btnCrop.Size = new System.Drawing.Size(110, 35);
+            this.btnCrop.TabIndex = 4;
+            this.btnCrop.Text = "✂️ Kırp";
+            this.btnCrop.UseVisualStyleBackColor = true;
+            this.btnCrop.Click += new System.EventHandler(this.btnCrop_Click);
+            // 
+            // nudRotationAngle
+            // 
+            this.nudRotationAngle.DecimalPlaces = 1;
+            this.nudRotationAngle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nudRotationAngle.Location = new System.Drawing.Point(10, 68);
+            this.nudRotationAngle.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.nudRotationAngle.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.nudRotationAngle.Name = "nudRotationAngle";
+            this.nudRotationAngle.Size = new System.Drawing.Size(110, 23);
+            this.nudRotationAngle.TabIndex = 5;
+            this.nudRotationAngle.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            // 
+            // lblRotationAngle
+            // 
+            this.lblRotationAngle.AutoSize = true;
+            this.lblRotationAngle.BackColor = System.Drawing.Color.Transparent;
+            this.lblRotationAngle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblRotationAngle.Location = new System.Drawing.Point(10, 50);
+            this.lblRotationAngle.Name = "lblRotationAngle";
+            this.lblRotationAngle.Size = new System.Drawing.Size(70, 15);
+            this.lblRotationAngle.TabIndex = 7;
+            this.lblRotationAngle.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 750);
+            this.ClientSize = new System.Drawing.Size(905, 860);
             this.Controls.Add(this.btnThemeToggle);
+            this.Controls.Add(this.groupBoxGeometric);
             this.Controls.Add(this.groupBoxML);
             this.Controls.Add(this.groupBoxAdjustments);
             this.Controls.Add(this.groupBoxFilters);
@@ -435,6 +543,7 @@ namespace MLImageProcessing
             ((System.ComponentModel.ISupportInitialize)(this.nudBlurRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudContrast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRotationAngle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
